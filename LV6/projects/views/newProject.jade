@@ -1,0 +1,21 @@
+form(action='/projects/new', method='POST')
+  div.form-group
+    label Naziv:
+    input(type='text', name='naziv', required)
+  div.form-group
+    label Opis:
+    input(type='text', name='opis', required)
+  div.form-group
+    label Cijena:
+    input(type='number', name='cijena', step='0.01', required)
+  div.form-group
+    label Obavljeni poslovi:
+    input(type='text', name='obavljeni_poslovi', required)
+  div.form-group
+    label Datum početka:
+    input(type='date', name='datum_pocetka', required)
+  div.form-group
+    label Datum završetka:
+    input(type='date', name='datum_zavrsetka', required)
+  div.form-group
+    button(type='submit') Spremi

@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1 Projekt: #{project.naziv}
+  p Opis: #{project.opis}
+  p Cijena: #{project.cijena}
+  p Obavljeni poslovi: #{project.obavljeni_poslovi}
+  p Datum početka: #{project.datum_pocetka.toISOString().split('T')[0]}
+  p Datum završetka: #{project.datum_zavrsetka.toISOString().split('T')[0]}
+  a(href='/projects') Back to Projects
+  a(href=`/projects/#{project._id}/edit`) Edit Project
+  form(action=`/projects/#{project._id}/delete`, method='post')
+    button(type='submit') Delete Project

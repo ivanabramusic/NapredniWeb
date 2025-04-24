@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  h1 Edit Project: #{project.naziv}
+  form(action='/projects/' + project._id + '/edit', method='POST')
+    div
+      label(for='naziv') Naziv
+      input(type='text', name='naziv', value=project.naziv)
+    div
+      label(for='opis') Opis
+      input(type='text', name='opis', value=project.opis)
+    div
+      label(for='cijena') Cijena
+      input(type='number', name='cijena', value=project.cijena)
+    div
+      label(for='obavljeni_poslovi') Obavljeni poslovi
+      input(type='text', name='obavljeni_poslovi', value=project.obavljeni_poslovi)
+    div
+      label(for='datum_pocetka') Datum početka
+      input(type='date', name='datum_pocetka', value=project.datum_pocetka.toISOString().split('T')[0])
+    div
+      label(for='datum_zavrsetka') Datum završetka
+      input(type='date', name='datum_zavrsetka', value=project.datum_zavrsetka.toISOString().split('T')[0])
+    div
+      button(type='submit') Save Changes
