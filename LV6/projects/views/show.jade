@@ -1,15 +1,13 @@
 extends layout
 
 block content
-  h1 Projekt: #{project.naziv}
+  h1 Project: #{project.naziv}
   p Opis: #{project.opis}
   p Cijena: #{project.cijena}
-  p Obavljeni poslovi: #{project.obavljeni_poslovi}
   p Datum početka: #{project.datum_pocetka.toISOString().split('T')[0]}
   p Datum završetka: #{project.datum_zavrsetka.toISOString().split('T')[0]}
-  
-  // Prikaz članova tima
-  h2 Tim projekta
+  h3 Tim:
   ul
     each member in project.tim
-      li #{member.username}  // Ispisivanje imena članova tima, assuming that "member" is the user object
+      li= member.name  // Pretpostavljam da u modelu korisnika postoji 'name' atribut
+  a(href='/projects/' + project._id + '/addMember') Add Member

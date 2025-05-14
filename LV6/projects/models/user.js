@@ -1,14 +1,36 @@
-// models/User.js
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');  // Za hashiranje lozinki
+const bcrypt = require('bcryptjs');
 
 // Definicija korisničkog shema
 const userSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  role: { type: String, enum: ['admin', 'user'], default: 'user' }, // Možeš dodati različite uloge
-  createdAt: { type: Date, default: Date.now },
+  name: { 
+    type: String, 
+    required: true 
+  },
+  email: { 
+    type: String, 
+    required: true, 
+    unique: true, 
+    validate: {
+      validator: function(v) {
+        return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(v);  // Regex za provjeru e-maila
+      },
+      message: props => `${props.value} nije validna e-mail adresa!`
+    }
+  },
+  password: { 
+    type: String, 
+    required: true 
+  },
+  role: { 
+    type: String, 
+    enum: ['admin', 'user'], 
+    default: 'user' 
+  },
+  createdAt: { 
+    type: Date, 
+    default: Date.now 
+  }
 });
 
 // Hashiranje lozinke prije spremanja korisnika
@@ -33,4 +55,4 @@ userSchema.methods.comparePassword = async function(candidatePassword) {
   }
 };
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.models.User || mongoose.model('User', userSchema);

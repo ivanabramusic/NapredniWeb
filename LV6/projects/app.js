@@ -1,8 +1,16 @@
-var createError = require('http-errors');
 var express = require('express');
+var app = express();
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+var cookieParser = require('cookie-parser');
+const session = require('express-session');
+
+var createError = require('http-errors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/projects')
@@ -11,11 +19,20 @@ mongoose.connect('mongodb://localhost/projects')
 
 require('./models/project');
 
+
+app.use(session({
+  secret: 'tajna', // koristi .env u pravom projektu
+  resave: false,
+  saveUninitialized: false
+}));
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var projectsRouter = require('./routes/projects');
+var authRouter = require('./routes/auth');
+app.use('/auth', authRouter);
 
-var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

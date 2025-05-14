@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  h1 Moji Projekti (Kao član)
+  table
+    thead
+      tr
+        th Naziv
+        th Opis
+        th Cijena
+        th Obavljeni poslovi
+        th Datum početka
+        th Datum završetka
+    tbody
+      each project in projects
+        tr
+          td= project.naziv
+          td= project.opis
+          td= project.cijena
+          td
+            form(action='/projects/' + project._id + '/updateWorkStatus', method='POST')
+              input(type='text', name='obavljeni_poslovi', value=project.obavljeni_poslovi)
+              button(type='submit') Ažuriraj
+          td= project.datum_pocetka.toISOString().split('T')[0]
+          td= project.datum_zavrsetka.toISOString().split('T')[0]
+  br
+  a(href='/projects') Nazad
+
+  form(action='/auth/logout', method='GET')
+    button(type='submit') Logout

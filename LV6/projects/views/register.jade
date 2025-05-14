@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1 Registracija
+  form(action='/auth/register', method='POST')
+    div
+      label(for='name') Ime:
+      input(type='text', name='name', required)      
+    div
+      label(for='email') Email:
+      input(type='email', name='email', required)    
+    div
+      label(for='password') Lozinka:
+      input(type='password', name='password', required)
+    div
+      button(type='submit') Registriraj se
+    div
+      a(href='/auth/login') Već imate račun? Prijavite se
+
+  // Ako postoji poruka, prikazujemo je
+  if message
+    p.error= message

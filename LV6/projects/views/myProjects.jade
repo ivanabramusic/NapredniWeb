@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  h1 Moji Projekti
+  table
+    thead
+      tr
+        th Naziv
+        th Opis
+        th Cijena
+        th Obavljeni poslovi
+        th Datum početka
+        th Datum završetka
+        th Akcije
+    tbody
+      each project in projects
+        tr
+          td= project.naziv
+          td= project.opis
+          td= project.cijena
+          td= project.obavljeni_poslovi
+          td= project.datum_pocetka.toISOString().split('T')[0]
+          td= project.datum_zavrsetka.toISOString().split('T')[0]
+          td
+            a(href='/projects/' + project._id + '/edit') Edit
+            form(action='/projects/' + project._id, method='POST')
+              input(type='hidden', name='_method', value='DELETE')
+              button(type='submit') Delete
+            a(href='/projects/' + project._id + '/addMember') Add Member
+  br
+  a(href='/projects') Nazad
+
+  form(action='/auth/logout', method='GET')
+    button(type='submit') Logout

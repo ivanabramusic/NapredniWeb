@@ -1,12 +1,13 @@
 extends layout
 
 block content
-  h1 Add Member to Project: #{project.naziv}
+  h1 Dodaj člana u projekt: #{project.naziv}
+
   form(action='/projects/' + project._id + '/addMember', method='POST')
-    div
-      label(for='userId') Select User to Add
-      select(name='userId')
-        each user in users  // Iteriraj kroz korisnike i prikaži ih
-          option(value=user._id) #{user.name}
-    div
-      button(type='submit') Add Member
+    label(for='userId') Odaberi korisnika:
+    select(name='userId', required=true)
+      each user in users
+        option(value=user._id)= user.name
+    br
+    button(type='submit') Dodaj člana
+  a(href='/projects') Odustani

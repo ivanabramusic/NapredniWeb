@@ -22,4 +22,9 @@ block content
       label(for='datum_zavrsetka') Datum završetka
       input(type='date', name='datum_zavrsetka', value=project.datum_zavrsetka.toISOString().split('T')[0])
     div
+      label(for='arhiviran') Arhiviran:
+      select(name='arhiviran', id='arhiviran')
+        option(value='false', selected=!project.arhiviran) Ne
+        option(value='true', selected=project.arhiviran) Da
+    div
       button(type='submit') Save Changes

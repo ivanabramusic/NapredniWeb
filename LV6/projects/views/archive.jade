@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  h1 Arhivirani Projekti
+  table
+    thead
+      tr
+        th Naziv
+        th Opis
+        th Cijena
+        th Obavljeni poslovi
+        th Voditelj
+        th Datum početka
+        th Datum završetka
+    tbody
+      each project in projects
+        tr
+          td= project.naziv
+          td= project.opis
+          td= project.cijena
+          td= project.obavljeni_poslovi
+          td= project.createdBy.name || 'Voditelj'
+          td= project.datum_pocetka.toISOString().split('T')[0]
+          td= project.datum_zavrsetka.toISOString().split('T')[0]
+
+  a(href='/projects') Nazad
